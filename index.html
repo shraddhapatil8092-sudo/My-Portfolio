@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#0f1117;
+    color:#e6e6e6;
+}
+
+/* NAVBAR */
+nav{
+    display:flex;
+    justify-content:flex-end;   /* keep right */
+    align-items:center;
+    background:transparent;
+    padding:15px 60px 15px 20px;  /* more space on right side */
+    position:absolute;
+    top:0;
+    width:100%;
+    z-index:1000;
+    box-sizing:border-box;
+}
+
+/* MENU BUTTONS */
+nav button{
+    background:none;
+    border:none;
+    color:#ccc;
+    font-size:16px;
+    margin:0 12px;   /* reduce gap slightly */
+    cursor:pointer;
+    position:relative;
+    white-space:nowrap;  /* prevent text cut */
+}
+
+/* HOVER LINE EFFECT */
+nav button::after{
+    content:'';
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#7ab8ff;
+    left:0;
+    bottom:-5px;
+    transition:0.3s;
+}
+
+nav button:hover::after{
+    width:100%;
+}/* SECTIONS */
+.section{
+    display:none;
+    padding:60px 20px;
+    animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.active{
+    display:block;
+}
+
+/* HOME */
+.home-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:85%;
+    margin:auto;
+    gap:40px;
+}
+
+.home-left h1{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.role{
+    font-size:24px;
+    color:#7ab8ff;
+    margin-bottom:15px;
+}
+
+.home-left p{
+    font-size:18px;
+    color:#cfcfcf;
+    line-height:1.6;
+    text-align: justify;   /* 👈 this line */
+}
+/* BUTTON */
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    background:#7ab8ff;
+    color:#000;
+    border-radius:8px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+/* PROFILE */
+.profile-box{
+    width:350px;
+    padding:15px;
+    border-radius:20px;
+    background:linear-gradient(145deg,#1c1f26,#10131a);
+    box-shadow:0 0 25px rgba(122,184,255,0.2);
+}
+
+.profile-img{
+    width:100%;
+    height:420px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+/* ABOUT */
+.about-container{
+    width:80%;
+    margin:auto;
+}
+
+.about-title{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.about-text{
+    font-size:18px;
+    color:#cfcfcf;
+    line-height:1.7;
+    margin-bottom:40px;
+}
+
+/* EDUCATION */
+.edu-card{
+    background:#1c1f26;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+    transition:0.3s;
+    border-left:4px solid #7ab8ff;
+}
+
+.edu-card:hover{
+    transform:translateX(10px);
+}
+
+/* SKILLS */
+.skills-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap:20px;
+    width:70%;
+    margin:auto;
+}
+
+.skill-card{
+    background:#1c1f26;
+    padding:20px;
+    text-align:center;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 15px rgba(122,184,255,0.3);
+}
+
+/* PROJECTS */
+.project-container{
+    width:70%;
+    margin:auto;
+}
+
+.project-card{
+    background:#1c1f26;
+    padding:18px;
+    margin:15px 0;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.project-card:hover{
+    transform:scale(1.02);
+    box-shadow:0 0 15px rgba(122,184,255,0.3);
+}
+
+/* CONTACT CONTAINER (same as before) */
+.contact-container{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap:25px;
+    width:60%;
+    margin:40px auto;
+}
+
+/* CARD AS LINK */
+.contact-card{
+    background:#1c1f26;
+    height:180px;
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;   /* remove underline */
+    color:#ffffff;          /* force white text */
+    transition:0.3s;
+}
+
+/* REMOVE BLUE/PURPLE STATES */
+.contact-card:link,
+.contact-card:visited,
+.contact-card:hover,
+.contact-card:active{
+    color:#ffffff;
+}
+
+/* HOVER EFFECT */
+.contact-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 15px rgba(122,184,255,0.3);
+}
+
+/* ICON */
+.icon{
+    font-size:30px;
+    margin-bottom:10px;
+    color:#7ab8ff;
+}
+/* RESPONSIVE */
+@media(max-width:768px){
+    .home-container{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <button onclick="show('home')">Home</button>
+    <button onclick="show('about')">About</button>
+    <button onclick="show('skills')">Skills</button>
+    <button onclick="show('projects')">Projects</button>
+    <button onclick="show('contact')">Contact</button>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section active">
+    <div class="home-container">
+        <div class="home-left">
+            <h1>Shraddha Patil</h1>
+            <p class="role">B.Tech CS Student</p>
+            <p> I am a B.Tech CSE student at RIT with a strong interest in programming, problem-solving, and software development. I am passionate about learning new technologies and applying my knowledge to build practical, real-world solutions.
+
+I have a keen interest in areas such as application development, web technologies, and emerging fields like Artificial Intelligence and Machine Learning. I enjoy working on academic and personal projects that enhance my technical skills and logical thinking.
+</p>
+           
+        </div>
+
+        <div class="home-right">
+            <div class="profile-box">
+                <img src="C:\Users\shrad\Downloads\Profile_Image.png" class="profile-img">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+    <div class="about-container">
+        <h1 class="about-title">About Me</h1>
+        <p class="about-text"> I am a Computer Science student focused on software development and building real-world applications.
+            I enjoy working on practical projects and continuously improving my technical skills.
+</p>
+
+        <!-- CARD 1 -->
+        <div class="edu-card">
+            <div class="edu-year">2021 - 22</div>
+            <h3>10th SSC</h3>
+            <p>Percentage: 93.80%</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="edu-card">
+            <div class="edu-year">2022 - 25</div>
+            <h3>Diploma In Information Technology</h3>
+            <p>Percentage: 90.94%</p>
+        </div>
+
+ <!-- CARD 2 -->
+        <div class="edu-card">
+            <div class="edu-year">2025 - 28</div>
+            <h3>B.Tech Computer Science</h3>
+            <p>CGPA: 8.43</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills" class="section">
+    <h1 style="text-align:center;">My Skills</h1>
+    <div class="skills-grid">
+        <div class="skills-grid">
+        <div class="skill-card">C</div>
+        <div class="skill-card">HTML</div>
+        <div class="skill-card">C++</div>
+        <div class="skill-card">Java</div>
+        <div class="skill-card">JavaScript</div>
+        <div class="skill-card">Python</div>
+        <div class="skill-card">Android Development</div>
+        <div class="skill-card">VB.NET</div>
+    </div>
+
+    </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" class="section">
+    <h1 style="text-align:center;">Projects</h1>
+    <div class="project-container">
+        <div class="project-card">
+            <h3>Job Portal System</h3>
+            <p>Web application for job seekers and providers.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Online Cloth Shop</h3>
+            <p>Flutter-based shopping application.</p>
+        </div>
+
+        <!-- new projects added -->
+        <div class="project-card">
+            <h3>Left2Lift</h3>
+            <p>Android application where leftover food becomes lifeline by reducing food waste and helping needy people.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Complaint Management System</h3>
+            <p>Java-based system to register, track and resolve complaints efficiently.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Library Management System</h3>
+            <p>C++ project to manage book issue, return and records.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Student Management System</h3>
+            <p>Java application for managing student records and marks.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Calculator App</h3>
+            <p>Python project for basic arithmetic operations.</p>
+        </div>
+
+        <div class="project-card">
+    <h3>Cafe Management System</h3>
+    <p>VB.NET application for managing cafe orders, billing and operations efficiently.</p>
+</div>
+
+
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+    <h1 style="text-align:center;">Contact Me</h1>
+
+    <div class="contact-container">
+
+        <!-- EMAIL -->
+        <a href="mailto:shraddhapatil8092@gmail.com" class="contact-card">
+
+            <div class="icon">✉</div>
+            <p>Email</p>
+
+        </a>
+
+        <!-- LINKEDIN -->
+        <a href="https://linkedin.com/in/shraddha-patil-13884b341" target="_blank" class="contact-card">
+
+            <div class="icon">🔗</div>
+            <p>LinkedIn</p>
+
+        </a>
+
+        <!-- GITHUB -->
+        <a href="https://github.com/" target="_blank" class="contact-card">
+
+            <div class="icon">💻</div>
+            <p>GitHub</p>
+
+        </a>
+
+    </div>
+</div></div><script>
+function show(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
